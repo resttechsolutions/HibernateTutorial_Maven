@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration">
+
+<hibernate-mapping package="com.resttechsoutions.hibernatetutorial.domain">
+    <class name="com.resttechsoutions.hibernatetutorial.domain.Categorias" table="CATEGORIAS">
+        
+        <id name="categoriaId" column="CATEGORIAID">
+            <generator class="native"/>
+        </id>
+        
+        <property name="nombreCat"/>
+        
+    </class>
+</hibernate-mapping>
