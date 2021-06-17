@@ -5,148 +5,138 @@
  */
 package com.resttechsoutions.hibernatetutorial.domain;
 
+import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.Objects;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Rafael Estrella
  */
 @Entity
-@Table(name = "ORDENES")
-public class Ordenes {
-    
+@Table(name = "ordenes")
+@XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Ordenes.findAll", query = "SELECT o FROM Ordenes o"),
+    @NamedQuery(name = "Ordenes.findByOrdenid", query = "SELECT o FROM Ordenes o WHERE o.ordenid = :ordenid"),
+    @NamedQuery(name = "Ordenes.findByFechaorden", query = "SELECT o FROM Ordenes o WHERE o.fechaorden = :fechaorden"),
+    @NamedQuery(name = "Ordenes.findByDescuento", query = "SELECT o FROM Ordenes o WHERE o.descuento = :descuento")})
+public class Ordenes implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "ORDENID")
-    private int ordenId;
-    
-    @Column(name = "EMPLEADOID")
-    private int empleadoId;
-    
-    @Column(name = "CLIENTEID")
-    private int clienteId;
-    
-    
+    private Integer ordenid;
+    @Basic(optional = false)
+    @NotNull
     @Column(name = "FECHAORDEN")
-    private Date fechaOrden;
-    
+    @Temporal(TemporalType.DATE)
+    private Date fechaorden;
     @Column(name = "DESCUENTO")
-    private int descuento;
-    
-    
+    private Integer descuento;
+    @JoinColumn(name = "CLIENTEID", referencedColumnName = "CLIENTEID")
+    @ManyToOne(optional = false)
+    private Clientes clienteid;
+    @JoinColumn(name = "EMPLEADOID", referencedColumnName = "EMPLEADOID")
+    @ManyToOne(optional = false)
+    private Empleados empleadoid;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ordenes")
+    private Collection<DetalleOrdenes> detalleOrdenesCollection;
 
     public Ordenes() {
-        super();
     }
 
-    public Ordenes(int ordenId) {
-        this();
-        this.ordenId = ordenId;
+    public Ordenes(Integer ordenid) {
+        this.ordenid = ordenid;
     }
 
-    public Ordenes(int ordenId, int empleadoId) {
-        this(ordenId);
-        this.empleadoId = empleadoId;
+    public Ordenes(Integer ordenid, Date fechaorden) {
+        this.ordenid = ordenid;
+        this.fechaorden = fechaorden;
     }
 
-    public Ordenes(int ordenId, int empleadoId, int clienteId) {
-        this(ordenId, empleadoId);
-        this.clienteId = clienteId;
+    public Integer getOrdenid() {
+        return ordenid;
     }
 
-    public Ordenes(int ordenId, int empleadoId, int clienteId, Date fechaOrden) {
-        this(ordenId,empleadoId,clienteId);
-        this.fechaOrden = fechaOrden;
+    public void setOrdenid(Integer ordenid) {
+        this.ordenid = ordenid;
     }
 
-    public Ordenes(int ordenId, int empleadoId, int clienteId, Date fechaOrden, int descuento) {
-        this(ordenId,empleadoId,clienteId,fechaOrden);
-        this.descuento = descuento;
+    public Date getFechaorden() {
+        return fechaorden;
     }
 
-    public int getOrdenId() {
-        return ordenId;
+    public void setFechaorden(Date fechaorden) {
+        this.fechaorden = fechaorden;
     }
 
-    public void setOrdenId(int ordenId) {
-        this.ordenId = ordenId;
-    }
-
-    public int getEmpleadoId() {
-        return empleadoId;
-    }
-
-    public void setEmpleadoId(int empleadoId) {
-        this.empleadoId = empleadoId;
-    }
-
-    public int getClienteId() {
-        return clienteId;
-    }
-
-    public void setClienteId(int clienteId) {
-        this.clienteId = clienteId;
-    }
-
-    public Date getFechaOrden() {
-        return fechaOrden;
-    }
-
-    public void setFechaOrden(Date fechaOrden) {
-        this.fechaOrden = fechaOrden;
-    }
-
-    public int getDescuento() {
+    public Integer getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(int descuento) {
+    public void setDescuento(Integer descuento) {
         this.descuento = descuento;
+    }
+
+    public Clientes getClienteid() {
+        return clienteid;
+    }
+
+    public void setClienteid(Clientes clienteid) {
+        this.clienteid = clienteid;
+    }
+
+    public Empleados getEmpleadoid() {
+        return empleadoid;
+    }
+
+    public void setEmpleadoid(Empleados empleadoid) {
+        this.empleadoid = empleadoid;
+    }
+
+    @XmlTransient
+    public Collection<DetalleOrdenes> getDetalleOrdenesCollection() {
+        return detalleOrdenesCollection;
+    }
+
+    public void setDetalleOrdenesCollection(Collection<DetalleOrdenes> detalleOrdenesCollection) {
+        this.detalleOrdenesCollection = detalleOrdenesCollection;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + this.ordenId;
-        hash = 17 * hash + this.empleadoId;
-        hash = 17 * hash + this.clienteId;
-        hash = 17 * hash + Objects.hashCode(this.fechaOrden);
-        hash = 17 * hash + this.descuento;
+        int hash = 0;
+        hash += (ordenid != null ? ordenid.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Ordenes)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Ordenes other = (Ordenes) obj;
-        if (this.ordenId != other.ordenId) {
-            return false;
-        }
-        if (this.empleadoId != other.empleadoId) {
-            return false;
-        }
-        if (this.clienteId != other.clienteId) {
-            return false;
-        }
-        if (this.descuento != other.descuento) {
-            return false;
-        }
-        if (!Objects.equals(this.fechaOrden, other.fechaOrden)) {
+        Ordenes other = (Ordenes) object;
+        if ((this.ordenid == null && other.ordenid != null) || (this.ordenid != null && !this.ordenid.equals(other.ordenid))) {
             return false;
         }
         return true;
@@ -154,13 +144,7 @@ public class Ordenes {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Ordenes{ordenId=").append(ordenId);
-        sb.append(", empleadoId=").append(empleadoId);
-        sb.append(", clienteId=").append(clienteId);
-        sb.append(", fechaOrden=").append(fechaOrden);
-        sb.append(", descuento=").append(descuento);
-        sb.append('}');
-        return sb.toString();
+        return "com.resttechsoutions.hibernatetutorial.domain.Ordenes[ ordenid=" + ordenid + " ]";
     }
+    
 }

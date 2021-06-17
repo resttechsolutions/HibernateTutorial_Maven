@@ -13,6 +13,15 @@
         <property name = "connection.pool_size">1</property>
         <property name = "hibernate.show_sql">true</property>
         <property name = "hibernate.current_session_context_class">thread</property>
-        <mapping resource = "Categorias.hbm.xml"/>
+        <!--<mapping resource = "Categorias.hbm.xml"/>-->
+        
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Categorias"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Clientes"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.DetalleOrdenes"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.DetalleOrdenesPK"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Empleados"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Ordenes"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Productos"/>
+        <mapping class="com.resttechsoutions.hibernatetutorial.domain.Proveedores"/>
     </session-factory>
 </hibernate-configuration>

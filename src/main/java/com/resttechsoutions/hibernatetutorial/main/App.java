@@ -6,6 +6,7 @@
 package com.resttechsoutions.hibernatetutorial.main;
 
 import com.resttechsoutions.hibernatetutorial.domain.Categorias;
+import com.resttechsoutions.hibernatetutorial.domain.Ordenes;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -33,11 +34,16 @@ public class App {
         Transaction t = s.beginTransaction();
 
         List<Categorias> result = s.createQuery("from Categorias").list();
+        List<Ordenes> resultOrdenes = s.createQuery("from Ordenes").list();
         t.commit();
 
         result.stream()
                 .forEach(
-                        c -> System.out.println(c.getCategoriaId() + " - " + c.getCategoriaId())
+                        c -> System.out.println(c.getCategoriaid() + " - " + c.getNombrecat())
+                );
+        resultOrdenes.stream()
+                .forEach(
+                        o -> System.out.println(o.getOrdenid() + " - " + o.getFechaorden())
                 );
 
     }
