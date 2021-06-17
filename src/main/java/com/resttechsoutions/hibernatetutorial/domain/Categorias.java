@@ -6,13 +6,11 @@
 package com.resttechsoutions.hibernatetutorial.domain;
 
 import java.util.Objects;
-import javax.persistence.Entity;
 
 /**
  *
  * @author Rafael Estrella
  */
-@Entity
 public class Categorias {
     private int categoriaId;
     private String nombreCat;
