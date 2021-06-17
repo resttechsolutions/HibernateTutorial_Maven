@@ -1,15 +1,14 @@
-<?xml version = "1.0" encoding = "utf-8"?>
-<!DOCTYPE hibernate-configuration SYSTEM 
-"http://www.hibernate.org/dtd/hibernate-configuration">
+<?xml version="1.0"?>
 
-<hibernate-mapping package="com.resttechsoutions.hibernatetutorial.domain">
-    <class name="com.resttechsoutions.hibernatetutorial.domain.Categorias" table="CATEGORIAS">
-        
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping package = "com.resttechsoutions.hibernatetutorial.domain">
+    <class name="Categorias" table="CATEGORIAS" schema="PEDIDOS">
         <id name="categoriaId" column="CATEGORIAID">
-            <generator class="native"/>
+            <generator class="increment"/>
         </id>
-        
         <property name="nombreCat"/>
-        
     </class>
 </hibernate-mapping>

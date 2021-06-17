@@ -6,28 +6,39 @@
 package com.resttechsoutions.hibernatetutorial.main;
 
 import com.resttechsoutions.hibernatetutorial.domain.Categorias;
-import com.resttechsoutions.hibernatetutorial.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  *
  * @author Rafael Estrella
  */
 public class App {
+
     public static void main(String[] args) {
-        Session s = HibernateUtil.getSessionFactory().getCurrentSession();
+        StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
+
+        Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
+
+        SessionFactory factory = meta.getSessionFactoryBuilder().build();
         
-        s.beginTransaction();
-        
+        Session s = factory.openSession();
+
+        Transaction t = s.beginTransaction();
+
         List<Categorias> result = s.createQuery("from Categorias").list();
-        s.getTransaction().commit();
-        
+        t.commit();
+
         result.stream()
                 .forEach(
-                
                         c -> System.out.println(c.getCategoriaId() + " - " + c.getCategoriaId())
                 );
-        
+
     }
 }
