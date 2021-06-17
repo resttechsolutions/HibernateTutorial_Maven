@@ -7,7 +7,7 @@
 
 ![WebHibernateProject](https://github.com/resttechsolutions/HibernateTutorial_Maven/blob/master/src/main/webapp/WEB-INF/images/WebHibernateProject.PNG?raw=true)
 
-## There is tow ways to working with **Hibernate**:
+## There is two ways to working with **Hibernate**:
 
 
 1. hbm.xml files
