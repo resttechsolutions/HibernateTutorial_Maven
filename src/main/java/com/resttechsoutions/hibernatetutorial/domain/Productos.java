@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -43,6 +45,7 @@ public class Productos implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "PRODUCTOID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer productoid;
     @Size(max = 50)
     @Column(name = "DESCRIPCION")

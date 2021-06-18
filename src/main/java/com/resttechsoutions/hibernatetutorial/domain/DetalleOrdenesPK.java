@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -21,10 +23,12 @@ public class DetalleOrdenesPK implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "ORDENID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int ordenid;
     @Basic(optional = false)
     @NotNull
     @Column(name = "DETALLEID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int detalleid;
 
     public DetalleOrdenesPK() {
