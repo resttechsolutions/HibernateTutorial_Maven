@@ -24,4 +24,4 @@
 - HibernateUtil
 
 ## SLQ
-- > ../sql_script
+- ../sql_script
