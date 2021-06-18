@@ -18,3 +18,10 @@
 2. @Annotations
   > We have to annotate directly in the class with `@Entity` `@Table(name = "TABLE_NAME")`
   > and in the **hibernate.cfg.xml** file we are using *`<mapping class="FullQualifyName"/>`*
+
+## File to manage the Hibernate Session
+
+- HibernateUtil
+
+## SLQ
+- > ../sql_script
